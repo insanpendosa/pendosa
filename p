@@ -272,14 +272,23 @@ client
 dev tun
 proto tcp
 remote xxxxxxxxx 1194
+remote-cert-tls server
 resolv-retry infinite
-route-method exe
 nobind
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
 persist-key
 persist-tun
 auth-user-pass
+auth none
+auth-nocache
+cipher none
+keysize 0
 comp-lzo
-verb 3
+setenv CLIENT_CERT 0
+reneg-sec 0
+verb 1
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
