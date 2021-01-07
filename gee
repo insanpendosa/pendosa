@@ -84,7 +84,7 @@ verb 3
 cipher none
 END
 # create openvpn config
-cat > /var/www/html/openvpn.ovpn <<-END
+cat > /var/www/html/client.ovpn <<-END
 client
 dev tun
 proto tcp
@@ -107,18 +107,12 @@ route-method exe
 route-delay 2
 cipher none
 http-proxy $IPADDRESS 8080
-http-proxy-option CUSTOM-HEADER CONNECT HTTP/1.0
-http-proxy-option CUSTOM-HEADER Host $1
-http-proxy-option CUSTOM-HEADER X-Online-Host $1
-http-proxy-option CUSTOM-HEADER X-Forward-Host $1
-http-proxy-option CUSTOM-HEADER Connection keep-alive
-http-proxy-option CUSTOM-HEADER Proxy-Connection keep-alive
 http-proxy-retry
 
 END
-echo '<ca>' >> /var/www/html/openvpn.ovpn
-cat /etc/openvpn/ca.crt >> /var/www/html/openvpn.ovpn
-echo '</ca>' >> /var/www/html/openvpn.ovpn
+echo '<ca>' >> /var/www/html/client.ovpn
+cat /etc/openvpn/ca.crt >> /var/www/html/client.ovpn
+echo '</ca>' >> /var/www/html/client.ovpn
 # create openvpn config with stunnel
 cat > /var/www/html/openvpnssl.ovpn <<-END
 client
