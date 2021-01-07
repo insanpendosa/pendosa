@@ -143,7 +143,7 @@ cat /etc/openvpn/ca.crt >> /var/www/html/openvpnssl.ovpn
 echo '</ca>' >> /var/www/html/openvpnssl.ovpn
 # compress config
 cd /var/www/html/
-tar -zcvf /var/www/html/openvpn.tgz openvpn.ovpn openvpnssl.ovpn stunnel.conf
+tar -zcvf /var/www/html/openvpn.tgz client.ovpn openvpnssl.ovpn stunnel.conf
 # install squid3
 apt-get -y install squid3
 cat > /etc/squid/squid.conf <<-END
