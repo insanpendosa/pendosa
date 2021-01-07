@@ -53,7 +53,7 @@ apt-get -y --purge remove bind*;
 clear
 echo "
 "
-sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
+# h -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
 wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 apt-get update;
 apt-get -y autoremove;
