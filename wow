@@ -84,7 +84,8 @@ verb 3
 cipher none
 END
 # create openvpn config
-cat > /var/www/html/client.ovpn <<-END
+mkdir -p /home/vps/public_html
+cat > /home/vps/public_html/client.ovpn <<-END
 client
 dev tun
 proto tcp
@@ -109,10 +110,11 @@ cipher none
 http-proxy $MYIP 8080
 http-proxy-retry
 
-<ca>
-$(cat /etc/openvpn/ca.crt)
-</ca>
-EOF16
+END
+echo '<ca>' >> /home/vps/public_html/client.ovpn
+cat /etc/openvpn/ca.crt >> /home/vps/public_html/client.ovpn
+echo '</ca>' >> /home/vps/public_html/client.ovpn
+
 # create openvpn config with stunnel
 cat > /var/www/html/openvpnssl.ovpn <<-END
 client
