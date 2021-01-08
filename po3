@@ -260,31 +260,30 @@ function InsOpenVPN(){
 
 port MyOvpnPort1
 proto tcp
-server 192.168.100.0 255.255.255.0
-verb 3
-duplicate-cn
-ca ca.crt
-dh dh2048.pem
-cert server.crt
-key server.key   
-ifconfig-pool-persist ipp.txt
-topology subnet
-keepalive 10 120
-cipher AES-256-CBC
-auth SHA256
-persist-key
+dev tun
 dev-type tun
 sndbuf 100000
 rcvbuf 100000
+ca ca.crt
+dh dh.pem
+cert server.crt
+key server.key 
+topology subnet
+server 192.168.100.0 255.255.255.0
+push "redirect-gateway def1" 
+keepalive 10 120
+cipher AES-256-CBC
+auth SHA256
 comp-lzo
-push "redirect-gateway def1 bypass-dhcp"
-push "dhcp-option DNS 8.8.8.8"
-push "dhcp-option DNS 8.8.4.4"
-client-cert-not-required
-dev tun
+user nobody
+group nogroup
+persist-tun
 status log.log
-plugin /usr/lib/openvpn/openvpn-auth-pam.so login
-username-as-common-name 
+verb 2
+mute 3
+plugin /etc/openvpn/openvpn-auth-pam.so /etc/pam.d/login
+verify-client-cert none
+username-as-common-name
 myOpenVPNconf1
 cat <<'myOpenVPNconf2' > /etc/openvpn/server_udp.conf
 # XAMScript
