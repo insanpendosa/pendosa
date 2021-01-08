@@ -20,7 +20,7 @@ apt-get install bc -y
 apt-get -y install openvpn easy-rsa;
 apt-get -y install python;
 
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/insanpendosa/pendosa/main/Jsns/openvpn.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/insanpendosa/pendosa/main/838/openvpn.tar"
 wget -O /etc/openvpn/default.tar "https://gakod.com/script/thai/default.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
