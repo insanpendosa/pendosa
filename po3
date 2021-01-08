@@ -259,40 +259,32 @@ function InsOpenVPN(){
 # XAMScript
 
 port MyOvpnPort1
-dev tun
 proto tcp
-ca ca.crt
-cert server.crt
-key server.key
+server 192.168.100.0 255.255.255.0
+verb 3
 duplicate-cn
-dh none
-persist-tun
-persist-key
-persist-remote-ip
-cipher none
-ncp-disable
-auth none
-comp-lzo
-tun-mtu 1500
-reneg-sec 0
-plugin /etc/openvpn/openvpn-auth-pam.so /etc/pam.d/login
-verify-client-cert none
-username-as-common-name
-max-clients 4000
+ca ca.crt
+dh dh2048.pem
+cert server.crt
+key server.key   
+ifconfig-pool-persist ipp.txt
 topology subnet
-server 172.16.0.0 255.255.0.0
-push "redirect-gateway def1"
-keepalive 5 60
-status /etc/openvpn/tcp_stats.log
-log /etc/openvpn/tcp.log
-verb 2
-script-security 2
-socket-flags TCP_NODELAY
-push "socket-flags TCP_NODELAY"
-push "dhcp-option DNS 1.0.0.1"
-push "dhcp-option DNS 1.1.1.1"
-push "dhcp-option DNS 8.8.4.4"
+keepalive 10 120
+cipher AES-256-CBC
+auth SHA256
+persist-key
+dev-type tun
+sndbuf 100000
+rcvbuf 100000
+comp-lzo
+push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+client-cert-not-required
+dev tun
+status log.log
+plugin /usr/lib/openvpn/openvpn-auth-pam.so login
+username-as-common-name 
 myOpenVPNconf1
 cat <<'myOpenVPNconf2' > /etc/openvpn/server_udp.conf
 # XAMScript
